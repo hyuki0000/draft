@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>draft</title>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js"></script> 
+<style type="text/css">
+body {
+  font-family: 'Inconsolata', "Hiragino Mincho ProN";
+  width: 800px;
+  margin: 0 auto;
+}
+#msg {
+  font-family: 'Inconsolata', "Hiragino Mincho ProN";
+  font-size: 20px;
+}
+#status {
+  color: gray;
+}
+</style>
+</head>
+<body>
+<form>
+<pre id="status"> </pre>
+<textarea id="msg" class="ui-widget-content" cols="80" rows="30" name="msg"></textarea>
+</form>
+<script>
+function eraseMarker() {
+  $('#status').text(' ');
+}
+function marker() {
+  $('#status').text('*');
+}
+$(function(){
+  $('#msg').val(localStorage.getItem('draft'));
+  setInterval(function() {
+    localStorage.setItem('draft', $('#msg').val());
+    eraseMarker();
+  }, 3000);
+  var old = $('#msg').val();
+  $('#msg').keyup(function() {
+    if (old != $('#msg').val()) marker();
+    old = $('#msg').val();
+  });
+  $('#msg').focus();
+});
+</script>
+</body></html>

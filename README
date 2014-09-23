@@ -1,0 +1,15 @@
+## NAME
+
+  draft - A very simple "Distraction Free" editor.
+
+## HOW TO USE
+
+  Open index.html with your browser.
+  Then just one textarea appears.
+  Input and edit your text in the textarea as you wish.
+
+  The text is automatically & locally saved in your browser's localStorage.
+  When you open index.html again later, the text will automatically restored.
+
+  That's it!
+
