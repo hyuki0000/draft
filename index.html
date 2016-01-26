@@ -1,49 +1,114 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
-<meta http-equiv="content-type" content="text/html; charset=utf-8">
-<title>draft</title>
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/jquery-ui.min.js"></script> 
-<style type="text/css">
-body {
-  font-family: 'Inconsolata', "Hiragino Mincho ProN";
-  width: 800px;
-  margin: 0 auto;
-}
-#msg {
-  font-family: 'Inconsolata', "Hiragino Mincho ProN";
-  font-size: 20px;
-}
-#status {
-  color: gray;
-}
-</style>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Draft - A Distraction Free Editor">
+    <meta name="author" content="Hiroshi Yuki">
+
+    <title>Draft - A Distraction Free Editor</title>
+
+    <link href="/favicon.ico" rel="icon">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+    <!-- Custom Fonts -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+    <!-- Custom CSS -->
+    <style>
+    body {
+        padding-top: 70px;
+        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    }
+
+    textarea#msg {
+      font-family: 'Inconsolata', "Hiragino Mincho ProN";
+      font-size: 20px;
+      max-width: 800px;
+      width:80%;
+      height:75vh;
+      outline: none;
+    }
+
+    textarea:focus {
+      outline: none;
+      border: blue 1px solid;
+    }
+
+    a {
+      color: gray;
+    }
+
+    a:hover {
+      color: white;
+    }
+
+    </style>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
 </head>
+
 <body>
-<form>
-<pre id="status"> </pre>
-<textarea id="msg" class="ui-widget-content" cols="80" rows="30" name="msg"></textarea>
-</form>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="http://draft.textfile.org/">Draft</a>
+            </div>
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-12 text-center">
+              <form>
+              <textarea placeholder = "draft.textfile.org" id="msg" class="ui-widget-content" name="msg"></textarea>
+              </form>
+            </div>
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
 <script>
-function eraseMarker() {
-  $('#status').text(' ');
-}
-function marker() {
-  $('#status').text('*');
-}
 $(function(){
-  $('#msg').val(localStorage.getItem('draft'));
-  setInterval(function() {
-    localStorage.setItem('draft', $('#msg').val());
-    eraseMarker();
-  }, 3000);
-  var old = $('#msg').val();
-  $('#msg').keyup(function() {
-    if (old != $('#msg').val()) marker();
-    old = $('#msg').val();
-  });
+  // Restore text.
+  var text = localStorage.getItem("sheet1");
+  if (text) {
+    $('#msg').val(text);
+  }
+  $('#msg').show();
   $('#msg').focus();
+
+  // Save text periodically.
+  setInterval(function() {
+    localStorage.setItem("sheet1", $('#msg').val());
+  }, 3000);
 });
 </script>
-</body></html>
+
+</body>
+</html>
